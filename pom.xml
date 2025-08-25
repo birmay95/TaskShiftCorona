@@ -12,8 +12,19 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <final.jar.name>app</final.jar.name>
+        <output.directory>.</output.directory>
+
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.38</version>
+        </dependency>
+    </dependencies>
     <build>
+        <finalName>${final.jar.name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -28,8 +39,8 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <finalName>app</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
+                    <outputDirectory>${output.directory}</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
