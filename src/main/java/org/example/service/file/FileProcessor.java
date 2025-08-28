@@ -1,7 +1,7 @@
 package org.example.service.file;
 
 import lombok.Getter;
-import org.example.model.Arguments;
+import org.example.model.CommandLineArguments;
 import org.example.model.Employee;
 import org.example.model.Manager;
 
@@ -39,7 +39,7 @@ public class FileProcessor {
     public FileProcessor() {
     }
 
-    public void processFiles(Arguments arguments) throws IOException {
+    public void processFiles(CommandLineArguments arguments) throws IOException {
         List<Path> files = findInputFiles();
         readFiles(files);
         assignEmployeesToDepartments();

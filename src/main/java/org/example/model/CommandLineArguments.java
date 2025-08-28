@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Arguments {
+public class CommandLineArguments {
 
     private final String sortField;
 

@@ -55,13 +55,17 @@ public class ParserConstants {
 
     public static final Set<String> OUTPUT_MODES = Set.of(OUTPUT_MODE_CONSOLE, OUTPUT_MODE_FILE);
 
-    public static final String ALLOWED_SORT_FIELDS_MESSAGE = "Допустимые значения: " + String.join(", ", SORT_FIELDS);
+    public static final String ALLOWED_SORT_FIELDS_MESSAGE = "Допустимые значения: "
+            + String.join(", ", SORT_FIELDS);
 
-    public static final String ALLOWED_ORDER_VALUES_MESSAGE = "Допустимые значения: " + String.join(", ", ORDER_VALUES);
+    public static final String ALLOWED_ORDER_VALUES_MESSAGE = "Допустимые значения: "
+            + String.join(", ", ORDER_VALUES);
 
-    public static final String ALLOWED_OUTPUT_MODES_MESSAGE = "Допустимые значения: " + String.join(", ", OUTPUT_MODES);
+    public static final String ALLOWED_OUTPUT_MODES_MESSAGE = "Допустимые значения: "
+            + String.join(", ", OUTPUT_MODES);
 
-    public static final String ALLOWED_ARGS_MESSAGE = "Допустимые значения: " + String.join(", ", ALLOWED_ARGS);
+    public static final String ALLOWED_ARGS_MESSAGE = "Допустимые значения: "
+            + String.join(", ", ALLOWED_ARGS);
 
     private ParserConstants() {
     }

@@ -20,8 +20,12 @@ public class ErrorWriter {
             Files.deleteIfExists(errorFile);
             return;
         }
-        try (BufferedWriter writer = Files.newBufferedWriter(errorFile, StandardCharsets.UTF_8,
-                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                errorFile,
+                StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING)
+        ) {
             for (String err : errorLines) {
                 writer.write(err);
                 writer.newLine();

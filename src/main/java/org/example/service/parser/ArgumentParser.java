@@ -1,6 +1,6 @@
 package org.example.service.parser;
 
-import org.example.model.Arguments;
+import org.example.model.CommandLineArguments;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import static org.example.constants.ErrorMessages.*;
 
 public class ArgumentParser {
 
-    public static Arguments parse(String[] args) {
+    public static CommandLineArguments parse(String[] args) {
         Map<String, String> params = parseArgsToMap(args);
 
         String sortField = parseSortField(params);
@@ -20,7 +20,7 @@ public class ArgumentParser {
         String outputMode = parseOutputMode(params, statEnabled);
         String outputPath = parseOutputPath(params, statEnabled, outputMode);
 
-        return new Arguments(sortField, order, statEnabled, outputMode, outputPath);
+        return new CommandLineArguments(sortField, order, statEnabled, outputMode, outputPath);
     }
 
     private static Map<String, String> parseArgsToMap(String[] args) {
@@ -30,7 +30,7 @@ public class ArgumentParser {
                 String[] parts = arg.split(KEY_VALUE_SEPARATOR, MAX_SPLIT_PARTS);
                 String key = parts[0];
                 if (!ALLOWED_ARGS.contains(key)) {
-                    throw new IllegalArgumentException(UNKNOWN_PARAM + key  + LINE_SEPARATOR + ALLOWED_ARGS_MESSAGE);
+                    throw new IllegalArgumentException(UNKNOWN_PARAM + key + LINE_SEPARATOR + ALLOWED_ARGS_MESSAGE);
                 }
                 if (REQUIRED_VALUE_ARGS.contains(key)) {
                     if (parts.length < 2 || parts[1] == null || parts[1].isBlank()) {
@@ -48,7 +48,12 @@ public class ArgumentParser {
     private static String parseSortField(Map<String, String> params) {
         String sortField = params.getOrDefault(ARG_SORT_LONG, params.get(ARG_SORT_SHORT));
         if (sortField != null && !SORT_FIELDS.contains(sortField)) {
-            throw new IllegalArgumentException(INVALID_SORT_VALUE + sortField + LINE_SEPARATOR + ALLOWED_SORT_FIELDS_MESSAGE);
+            throw new IllegalArgumentException(
+                    INVALID_SORT_VALUE
+                            + sortField
+                            + LINE_SEPARATOR
+                            + ALLOWED_SORT_FIELDS_MESSAGE
+            );
         }
         return sortField;
     }
@@ -60,7 +65,12 @@ public class ArgumentParser {
                 throw new IllegalArgumentException(ORDER_WITHOUT_SORT);
             }
             if (!ORDER_VALUES.contains(order)) {
-                throw new IllegalArgumentException(INVALID_ORDER_VALUE + order + LINE_SEPARATOR + ALLOWED_ORDER_VALUES_MESSAGE);
+                throw new IllegalArgumentException(
+                        INVALID_ORDER_VALUE
+                                + order
+                                + LINE_SEPARATOR
+                                + ALLOWED_ORDER_VALUES_MESSAGE
+                );
             }
         }
         return order;
@@ -73,7 +83,12 @@ public class ArgumentParser {
                 throw new IllegalArgumentException(OUTPUT_WITHOUT_STAT);
             }
             if (!OUTPUT_MODES.contains(outputMode)) {
-                throw new IllegalArgumentException(INVALID_OUTPUT_VALUE + outputMode + LINE_SEPARATOR + ALLOWED_OUTPUT_MODES_MESSAGE);
+                throw new IllegalArgumentException(
+                        INVALID_OUTPUT_VALUE
+                                + outputMode
+                                + LINE_SEPARATOR
+                                + ALLOWED_OUTPUT_MODES_MESSAGE
+                );
             }
         } else {
             outputMode = OUTPUT_MODE_CONSOLE;
