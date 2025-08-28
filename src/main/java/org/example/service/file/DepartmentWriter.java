@@ -1,6 +1,6 @@
 package org.example.service.file;
 
-import org.example.model.Arguments;
+import org.example.model.CommandLineArguments;
 import org.example.model.Employee;
 import org.example.model.Manager;
 
@@ -24,15 +24,27 @@ import static org.example.constants.RecordTypeConstants.MANAGER;
 
 public class DepartmentWriter {
 
-    public static void writeDepartments(Arguments arguments,
-                                        Map<String, List<Employee>> employeesByDepartment,
-                                        Map<String, Manager> managersByDepartment) throws IOException {
+    public static void writeDepartments(
+            CommandLineArguments arguments,
+            Map<String, List<Employee>> employeesByDepartment,
+            Map<String, Manager> managersByDepartment
+    ) throws IOException {
         for (String department : employeesByDepartment.keySet()) {
-            writeDepartmentFile(arguments, department, employeesByDepartment.get(department), managersByDepartment.get(department));
+            writeDepartmentFile(
+                    arguments,
+                    department,
+                    employeesByDepartment.get(department),
+                    managersByDepartment.get(department)
+            );
         }
     }
 
-    private static void writeDepartmentFile(Arguments arguments, String department, List<Employee> employees, Manager manager) throws IOException {
+    private static void writeDepartmentFile(
+            CommandLineArguments arguments,
+            String department,
+            List<Employee> employees,
+            Manager manager
+    ) throws IOException {
         List<Employee> sortedEmployees = sortEmployees(arguments, employees);
 
         Path outFile = Paths.get(department + FILE_EXTENSION);
@@ -49,7 +61,7 @@ public class DepartmentWriter {
         }
     }
 
-    private static List<Employee> sortEmployees(Arguments arguments, List<Employee> employees) {
+    private static List<Employee> sortEmployees(CommandLineArguments arguments, List<Employee> employees) {
         if (arguments.getSortField() == null) return employees;
 
         Comparator<Employee> comparator = SORT_BY_NAME.equals(arguments.getSortField())
@@ -65,11 +77,25 @@ public class DepartmentWriter {
     }
 
     public static String renderEmployeeRaw(Employee employee) {
-        return EMPLOYEE + STRING_SEPARATOR + employee.getId() + STRING_SEPARATOR + employee.getName() + STRING_SEPARATOR + formatSalary(employee.getSalary()) + STRING_SEPARATOR + employee.getManagerId();
+        return EMPLOYEE
+                + STRING_SEPARATOR
+                + employee.getId()
+                + STRING_SEPARATOR
+                + employee.getName()
+                + STRING_SEPARATOR
+                + formatSalary(employee.getSalary())
+                + STRING_SEPARATOR
+                + employee.getManagerId();
     }
 
     public static String renderManagerRaw(Manager manager) {
-        return MANAGER + STRING_SEPARATOR + manager.getId() + STRING_SEPARATOR + manager.getName() + STRING_SEPARATOR + formatSalary(manager.getSalary());
+        return MANAGER
+                + STRING_SEPARATOR
+                + manager.getId()
+                + STRING_SEPARATOR
+                + manager.getName()
+                + STRING_SEPARATOR
+                + formatSalary(manager.getSalary());
     }
 
     private static String formatSalary(double salary) {

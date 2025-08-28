@@ -8,13 +8,10 @@ import static org.example.constants.FileFormatConstants.*;
 
 public class StatisticsGenerator {
 
-    private final Map<String, List<Employee>> employeesByDepartments;
-
-    public StatisticsGenerator(Map<String, List<Employee>> employeesByDepartments) {
-        this.employeesByDepartments = employeesByDepartments;
+    public StatisticsGenerator() {
     }
 
-    public String generateStatistics() {
+    public String generateStatistics(Map<String, List<Employee>> employeesByDepartments) {
         StringBuilder statistics = new StringBuilder();
         statistics.append(STAT_HEADER).append(LINE_SEPARATOR);
 
